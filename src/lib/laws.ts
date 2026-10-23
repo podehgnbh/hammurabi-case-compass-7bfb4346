@@ -25,5 +25,4 @@ export const DEADLINES = [
   { key: "cassation", label: "التمييز (مدني)", days: 30 },
   { key: "correction", label: "تصحيح القرار التمييزي", days: 7 },
   { key: "cassation-criminal", label: "التمييز (جزائي)", days: 30 },
-  { key: "third-party", label: "اعتراض الغير", days: 0 },
 ];
