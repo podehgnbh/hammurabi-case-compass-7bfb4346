@@ -14,16 +14,381 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      cases: {
+        Row: {
+          ai_analysis: string | null
+          ai_analyzed_at: string | null
+          case_number: string | null
+          case_type: string | null
+          client_id: string
+          client_role: string | null
+          court: string | null
+          created_at: string
+          description: string | null
+          id: string
+          lawyer_id: string
+          next_session: string | null
+          opponent: string | null
+          status: string
+          title: string
+        }
+        Insert: {
+          ai_analysis?: string | null
+          ai_analyzed_at?: string | null
+          case_number?: string | null
+          case_type?: string | null
+          client_id: string
+          client_role?: string | null
+          court?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          lawyer_id?: string
+          next_session?: string | null
+          opponent?: string | null
+          status?: string
+          title: string
+        }
+        Update: {
+          ai_analysis?: string | null
+          ai_analyzed_at?: string | null
+          case_number?: string | null
+          case_type?: string | null
+          client_id?: string
+          client_role?: string | null
+          court?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          lawyer_id?: string
+          next_session?: string | null
+          opponent?: string | null
+          status?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cases_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      clients: {
+        Row: {
+          address: string | null
+          birth_date: string | null
+          created_at: string
+          email: string | null
+          full_name: string
+          id: string
+          lawyer_id: string
+          mother_name: string | null
+          national_id: string | null
+          notes: string | null
+          occupation: string | null
+          phone: string | null
+          photo_path: string | null
+        }
+        Insert: {
+          address?: string | null
+          birth_date?: string | null
+          created_at?: string
+          email?: string | null
+          full_name: string
+          id?: string
+          lawyer_id?: string
+          mother_name?: string | null
+          national_id?: string | null
+          notes?: string | null
+          occupation?: string | null
+          phone?: string | null
+          photo_path?: string | null
+        }
+        Update: {
+          address?: string | null
+          birth_date?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string
+          id?: string
+          lawyer_id?: string
+          mother_name?: string | null
+          national_id?: string | null
+          notes?: string | null
+          occupation?: string | null
+          phone?: string | null
+          photo_path?: string | null
+        }
+        Relationships: []
+      }
+      documents: {
+        Row: {
+          case_id: string | null
+          client_id: string
+          created_at: string
+          description: string | null
+          id: string
+          lawyer_id: string
+          mime: string | null
+          name: string
+          path: string
+          section: string
+          size: number | null
+        }
+        Insert: {
+          case_id?: string | null
+          client_id: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          lawyer_id?: string
+          mime?: string | null
+          name: string
+          path: string
+          section?: string
+          size?: number | null
+        }
+        Update: {
+          case_id?: string | null
+          client_id?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          lawyer_id?: string
+          mime?: string | null
+          name?: string
+          path?: string
+          section?: string
+          size?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "documents_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "documents_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      fees: {
+        Row: {
+          amount: number
+          client_id: string
+          created_at: string
+          entry_date: string
+          id: string
+          kind: string
+          lawyer_id: string
+          note: string | null
+        }
+        Insert: {
+          amount?: number
+          client_id: string
+          created_at?: string
+          entry_date?: string
+          id?: string
+          kind?: string
+          lawyer_id?: string
+          note?: string | null
+        }
+        Update: {
+          amount?: number
+          client_id?: string
+          created_at?: string
+          entry_date?: string
+          id?: string
+          kind?: string
+          lawyer_id?: string
+          note?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fees_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      hearings: {
+        Row: {
+          case_id: string
+          created_at: string
+          hearing_date: string
+          id: string
+          lawyer_id: string
+          note: string | null
+          outcome: string | null
+        }
+        Insert: {
+          case_id: string
+          created_at?: string
+          hearing_date: string
+          id?: string
+          lawyer_id?: string
+          note?: string | null
+          outcome?: string | null
+        }
+        Update: {
+          case_id?: string
+          created_at?: string
+          hearing_date?: string
+          id?: string
+          lawyer_id?: string
+          note?: string | null
+          outcome?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "hearings_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      law_articles: {
+        Row: {
+          article_number: string
+          content: string
+          created_at: string
+          id: string
+          law_key: string
+        }
+        Insert: {
+          article_number: string
+          content: string
+          created_at?: string
+          id?: string
+          law_key: string
+        }
+        Update: {
+          article_number?: string
+          content?: string
+          created_at?: string
+          id?: string
+          law_key?: string
+        }
+        Relationships: []
+      }
+      notes: {
+        Row: {
+          case_id: string | null
+          client_id: string
+          content: string
+          created_at: string
+          done: boolean
+          id: string
+          is_task: boolean
+          lawyer_id: string
+        }
+        Insert: {
+          case_id?: string | null
+          client_id: string
+          content: string
+          created_at?: string
+          done?: boolean
+          id?: string
+          is_task?: boolean
+          lawyer_id?: string
+        }
+        Update: {
+          case_id?: string | null
+          client_id?: string
+          content?: string
+          created_at?: string
+          done?: boolean
+          id?: string
+          is_task?: boolean
+          lawyer_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notes_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notes_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          active: boolean
+          created_at: string
+          full_name: string
+          id: string
+          username: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          full_name?: string
+          id: string
+          username: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          full_name?: string
+          id?: string
+          username?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "lawyer"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +515,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "lawyer"],
+    },
   },
 } as const
