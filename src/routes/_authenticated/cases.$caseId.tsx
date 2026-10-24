@@ -49,7 +49,7 @@ function CasePage() {
     try {
       await analyze({ data: { caseId } });
       qc.invalidateQueries({ queryKey: ["case", caseId] });
-      toast.success("اكتمل التحليل الذكي");
+      toast.success("اكتمل التحليل القانوني");
     } catch (e: any) {
       toast.error(e.message);
     } finally {
@@ -98,7 +98,7 @@ function CasePage() {
           <>
             <Button variant="outline" onClick={() => setEdit(true)}><Pencil /> تعديل</Button>
             <Button variant="gold" onClick={runAnalysis} disabled={analyzing}>
-              {analyzing ? <Loader2 className="animate-spin" /> : <Sparkles />} {c.ai_analysis ? "إعادة التحليل الذكي" : "تحليل القضية بالذكاء الاصطناعي"}
+              {analyzing ? <Loader2 className="animate-spin" /> : <Sparkles />} {c.ai_analysis ? "تحديث التحليل" : "تحليل القضية"}
             </Button>
           </>
         }
@@ -113,7 +113,7 @@ function CasePage() {
 
       <Tabs defaultValue="analysis" dir="rtl">
         <TabsList className="mb-6 flex h-auto w-full flex-wrap justify-start gap-1 bg-secondary/60 p-1.5">
-          <TabsTrigger value="analysis" className="gap-1.5"><Sparkles className="size-4" /> التحليل الذكي</TabsTrigger>
+          <TabsTrigger value="analysis" className="gap-1.5"><Sparkles className="size-4" /> التحليل القانوني</TabsTrigger>
           <TabsTrigger value="hearings" className="gap-1.5"><CalendarClock className="size-4" /> الجلسات ({hearings.length})</TabsTrigger>
           <TabsTrigger value="docs" className="gap-1.5">مستندات القضية</TabsTrigger>
           <TabsTrigger value="notes" className="gap-1.5"><StickyNote className="size-4" /> ملاحظات ({notes.length})</TabsTrigger>
@@ -123,7 +123,7 @@ function CasePage() {
           {c.ai_analysis ? (
             <div className="rounded-2xl border border-primary/30 bg-card p-6 shadow-card">
               <div className="mb-4 flex items-center justify-between text-xs text-muted-foreground">
-                <span className="flex items-center gap-1 text-primary"><Sparkles className="size-3.5" /> تحليل حمورابي الذكي</span>
+                <span className="flex items-center gap-1 text-primary"><Sparkles className="size-3.5" /> التحليل القانوني</span>
                 {c.ai_analyzed_at && <span>آخر تحليل: {formatDateTime(c.ai_analyzed_at)}</span>}
               </div>
               <div className="prose prose-invert max-w-none whitespace-pre-wrap text-sm leading-8">{c.ai_analysis}</div>
@@ -132,7 +132,7 @@ function CasePage() {
           ) : (
             <div className="rounded-2xl border border-dashed border-border p-12 text-center">
               <Sparkles className="mx-auto mb-3 size-10 text-primary/60" />
-              <p className="text-muted-foreground">اضغط «تحليل القضية بالذكاء الاصطناعي» لتحصل على تحليل قانوني شامل: التكييف القانوني، نقاط القوة والضعف، التوقع المرجح للحكم، طرق الطعن، وخطة عمل.</p>
+              <p className="text-muted-foreground">اضغط «تحليل القضية» للحصول على مراجعة قانونية منظمة تشمل: التكييف القانوني، نقاط القوة والضعف، النتيجة المحتملة، طرق الطعن، وخطة عمل.</p>
             </div>
           )}
         </TabsContent>

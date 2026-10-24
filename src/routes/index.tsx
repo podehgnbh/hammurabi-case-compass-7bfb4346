@@ -7,10 +7,10 @@ import { Brand } from "@/components/AppShell";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "حمورابي — المنصة الأقوى لإدارة مكاتب المحاماة في العراق" },
-      { name: "description", content: "أدر موكليك وقضاياك وعقودك في مكان واحد، مع تحليل قانوني بالذكاء الاصطناعي ومكتبة للقوانين العراقية." },
+      { title: "حمورابي — نظام إدارة مكاتب المحاماة في العراق" },
+      { name: "description", content: "أدر موكليك وقضاياك وعقودك ومستنداتك في مكان واحد، مع أدوات قانونية ومكتبة للقوانين العراقية." },
       { property: "og:title", content: "حمورابي — منصة المحامي العراقي" },
-      { property: "og:description", content: "ملفات الموكلين، القضايا، العقود الجاهزة، والتحليل الذكي للقضايا." },
+      { property: "og:description", content: "ملفات الموكلين، القضايا، العقود الجاهزة، والأدوات القانونية." },
     ],
   }),
   component: Landing,
@@ -18,7 +18,7 @@ export const Route = createFileRoute("/")({
 
 const FEATURES = [
   { icon: Users, title: "ملف لكل موكل", text: "بيانات كاملة وصورة ومجلد منظم بأقسام القضايا والأتعاب والمستندات." },
-  { icon: Sparkles, title: "تحليل بالذكاء الاصطناعي", text: "تحليل شامل للقضية: نقاط القوة والضعف، المواد القانونية، وتوقع الحكم." },
+  { icon: Sparkles, title: "مراجعة القضايا", text: "مراجعة منظمة لوقائع القضية، والمواد القانونية ذات الصلة، ونقاط القوة والمخاطر." },
   { icon: FileSignature, title: "عقود جاهزة", text: "أتعاب، زواج، بيع، إيجار، وكالات وغيرها تُملأ وتُطبع بثوانٍ." },
   { icon: BookOpen, title: "المكتبة القانونية", text: "القوانين العراقية الأساسية مع البحث في المواد." },
   { icon: FolderLock, title: "أرشيف آمن", text: "ارفع الصور وملفات PDF والتسجيلات الصوتية بخصوصية تامة." },
@@ -35,9 +35,6 @@ function Landing() {
 
       <section className="mx-auto grid max-w-7xl items-center gap-10 px-5 pb-16 pt-6 lg:grid-cols-2 lg:pt-14">
         <div>
-          <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs text-primary">
-            <Sparkles className="size-3.5" /> مدعوم بالذكاء الاصطناعي
-          </span>
           <h1 className="mt-5 text-4xl leading-[1.25] sm:text-6xl">
             مكتبك القانوني
             <br />
@@ -67,7 +64,14 @@ function Landing() {
           ))}
         </div>
       </section>
-      <footer className="border-t border-border py-6 text-center text-xs text-muted-foreground">© حمورابي — جميع الحقوق محفوظة</footer>
+      <footer className="border-t border-border px-5 py-6 text-center text-xs text-muted-foreground">
+        <p>جميع الحقوق محفوظة لدى عبدالله مصطفى © 2026</p>
+        <div className="mt-3 flex flex-wrap justify-center gap-x-5 gap-y-2" dir="rtl">
+          <a className="transition-colors hover:text-primary" href="https://wa.me/9647810822068" target="_blank" rel="noreferrer">واتساب: 07810822068</a>
+          <a className="transition-colors hover:text-primary" href="tel:+9647905861017" dir="ltr">اتصال: 07905861017</a>
+          <a className="transition-colors hover:text-primary" href="https://t.me/np6_o" target="_blank" rel="noreferrer">تلغرام: @np6_o</a>
+        </div>
+      </footer>
     </div>
   );
 }

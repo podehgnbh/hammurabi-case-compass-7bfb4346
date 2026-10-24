@@ -79,7 +79,7 @@ export function CaseForm({ open, onOpenChange, clientId, initial, onSaved }: {
             <div className="space-y-1.5"><Label>الجلسة القادمة</Label><Input type="datetime-local" dir="ltr" value={f.next_session ? f.next_session.slice(0, 16) : ""} onChange={(e) => setF({ ...f, next_session: e.target.value })} /></div>
           </div>
           <div className="space-y-1.5"><Label>الخصم</Label><Input value={f.opponent ?? ""} onChange={(e) => setF({ ...f, opponent: e.target.value })} /></div>
-          <div className="space-y-1.5"><Label>وقائع القضية</Label><Textarea rows={5} value={f.description ?? ""} onChange={(e) => setF({ ...f, description: e.target.value })} placeholder="اكتب وقائع القضية بالتفصيل — تُستخدم في التحليل الذكي" /></div>
+          <div className="space-y-1.5"><Label>وقائع القضية</Label><Textarea rows={5} value={f.description ?? ""} onChange={(e) => setF({ ...f, description: e.target.value })} placeholder="اكتب وقائع القضية بالتفصيل — تُستخدم في إعداد مراجعة القضية" /></div>
           <Button variant="gold" className="h-11 w-full" disabled={busy}>{busy && <Loader2 className="animate-spin" />} حفظ</Button>
         </form>
       </DialogContent>

@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { askAssistant } from "@/lib/ai.functions";
 
 export const Route = createFileRoute("/_authenticated/assistant")({
-  head: () => ({ meta: [{ title: "المساعد الذكي — حمورابي" }, { name: "description", content: "مستشار قانوني ذكي للقانون العراقي." }] }),
+  head: () => ({ meta: [{ title: "المساعد القانوني — حمورابي" }, { name: "description", content: "مساعد قانوني للمحامي العراقي." }] }),
   component: Assistant,
 });
 
@@ -49,8 +49,8 @@ function Assistant() {
   return (
     <div className="flex min-h-[calc(100vh-10rem)] flex-col">
       <PageHeader
-        title="المساعد الذكي"
-        subtitle="اسأل عن القانون العراقي — إجابات مساعدة لا تغني عن رأيك المهني"
+        title="المساعد القانوني"
+        subtitle="استفسر عن القانون العراقي — معلومات مساعدة لا تغني عن رأيك المهني"
         actions={msgs.length > 0 && <Button variant="outline" onClick={() => setMsgs([])}><Trash2 /> محادثة جديدة</Button>}
       />
 
