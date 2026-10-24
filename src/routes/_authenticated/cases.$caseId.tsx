@@ -62,7 +62,7 @@ function CasePage() {
     const { error } = await supabase.from("hearings").insert({
       case_id: caseId, hearing_date: new Date(hearing.hearing_date).toISOString(), note: hearing.note || null, outcome: hearing.outcome || null,
     });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     setHearing({ hearing_date: "", note: "", outcome: "" });
     qc.invalidateQueries({ queryKey: ["hearings", caseId] });
     toast.success("أُضيفت الجلسة");
@@ -72,7 +72,7 @@ function CasePage() {
     e.preventDefault();
     if (!note.trim()) return;
     const { error } = await supabase.from("notes").insert({ case_id: caseId, client_id: c!.client_id, content: note.trim() });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     setNote("");
     qc.invalidateQueries({ queryKey: ["case-notes", caseId] });
   }

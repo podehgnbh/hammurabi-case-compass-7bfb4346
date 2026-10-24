@@ -37,7 +37,7 @@ function Laws() {
   async function addArticle(e: React.FormEvent) {
     e.preventDefault();
     const { error } = await supabase.from("law_articles").insert({ law_key: addFor!, article_number: art.article_number, content: art.content });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     setArt({ article_number: "", content: "" });
     setAddFor(null);
     qc.invalidateQueries({ queryKey: ["law-articles"] });
