@@ -59,7 +59,7 @@ function ClientFolder() {
   async function addFee(e: React.FormEvent) {
     e.preventDefault();
     const { error } = await supabase.from("fees").insert({ client_id: clientId, kind: fee.kind, amount: Number(fee.amount), note: fee.note || null });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     setFee({ kind: "payment", amount: "", note: "" });
     qc.invalidateQueries({ queryKey: ["fees", clientId] });
     toast.success("تمت الإضافة");
@@ -69,7 +69,7 @@ function ClientFolder() {
     e.preventDefault();
     if (!note.trim()) return;
     const { error } = await supabase.from("notes").insert({ client_id: clientId, content: note.trim() });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     setNote("");
     qc.invalidateQueries({ queryKey: ["notes", clientId] });
   }
@@ -139,7 +139,7 @@ function ClientFolder() {
                       onClick={async () => {
                         if (!confirm(`حذف قضية «${c.title}» وجلساتها وملاحظاتها؟`)) return;
                         const { error } = await supabase.from("cases").delete().eq("id", c.id);
-                        if (error) return toast.error(error.message);
+                        if (error) { toast.error(error.message); return; }
                         qc.invalidateQueries({ queryKey: ["cases", clientId] });
                       }}
                     ><Trash2 /></Button>

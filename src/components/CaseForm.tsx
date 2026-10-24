@@ -19,7 +19,7 @@ export type CaseRow = {
 };
 
 export function CaseForm({ open, onOpenChange, clientId, initial, onSaved }: {
-  open: boolean; onOpenChange: (v: boolean) => void; clientId: string; initial?: CaseRow; onSaved: (id: string) => void;
+  open: boolean; onOpenChange: (v: boolean) => void; clientId: string; initial?: CaseRow | undefined; onSaved: (id: string) => void;
 }) {
   const [f, setF] = useState<CaseRow>(initial ?? { title: "", status: "قيد المرافعة" });
   const [busy, setBusy] = useState(false);
