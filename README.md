@@ -1,14 +1,48 @@
-# Welcome to your Lovable project
+# Hammurabi Case Compass
+
+باع اريدك تعطيني ملفات جاهزه ارفعهن على  جيت هاب هو عباره عن نظام يقدر من خلاله المحامي يدير الموكلين اللي موجودين عنده 
+
+كل معلومات الموكل صورته اسمه كافه المعلومات 
+
+كل موكل موجود عندنا راح يصير له فولدر 
+
+الفولدر راح تصير بيه اقسام 
+
+قسم يخص يخص القضيه بصوره عامه واي كتاب او قرار يخص القضيه 
+
+قسم يخص المحامي اللي هو عقد الاتعاب مال محامي ويا هذا الشخص 
+
+وبعد اقسام من يمك ممكن تخدم المحامي داخل الفولدر مال الموكل 
+
+تسوي لي ايضا داخل الفولدر مال مال موكل ندخل على قسم القضايا اكو زر تحليل بالذكاء الصناعي الذكاء الصناعي ياخذ القضيه وكل المعلومات اللي موجوده على هاي القضيه ويحللها ويبدا ينطي معلومات المحامي من هالحكم البدائي يعني معلومات كامله حول القضيه الذكاء الصناعي بعد ما يحللها ها وكل موكل داخل الفولدر مالته نقدر نفتح قضيه او دعوه داخل الفولدر مال هذا الموكل 
+
+تضيف لي ايضا قسم قسم العقود اللي هي تصير عقود جاهزه مثل عقود الاتعاب عقود الزواج كافه العقود اللي موجوده بالقانون العراقي 
+
+تضيف لي كتاب المتن العراقي مال القانون 
+
+واي معلومه او اي ميزه من الممكن ان تفيد المحامين 
+
+اريد اقوى شيء موجود واريده يعجب كل المحامين لانه انا هذا المشروع تجاري اريد اسويه 
+
+الواجهه بطريقه عصريه وحديثه واحترافيه لها ابعد حد 
+
+زين هسه راح نجي على سالفه تسجيل 
+
+راح تصير عندي واجهه مال ادمن 
+
+ادخل بهاي الواجهه اسم المحامي الكامل يوزر للمحامي باسورد للمحامي من ادوس توليد راح ينضاف المحامي بالقائمه مال مستخدمين اقدر اطفي الحساب على المحامي واشغله من يمي من الواجهه مال ادمن ايضا مندس التوليد طلع لي اسم المحامي واليوزر مالته والباسورد مالته وبصفه رابط تولد لي هذا الرابط انطيه للمحامي قد ما انطي لي المحامي راح تطلع لي المحامي نواجه التسجيل دخول يدخل بها اليوزر والباسورد يفتح عند التطبيق اللي شرحت لك عليه فوق يعني هو موقع الكتروني مو تطبيق يفتح يم الفوق يقدر اضافه موكل تعديل على بيانات موكل ايضا يقدر يرفع المحامي صور ملفات بي دي اف تسجيلات صوت كل شيء يقدر المحامي يرفع داخل الفولدر مال موكل اللي يريده هو الموقع الالكتروني اسمه حمورابي 
+
+هسه اريدك تشرح لي ايش راح تسوي لي وشلون وشنو المزايا اللي راح تضيفها اضافه المزايا اللي قلت لك عليها
 
 This project was built with [Lovable](https://lovable.dev).
 
 ## Build with Lovable
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/f7d8ba78-9c9a-4e21-81fa-699a65f5e1b9).
 
 - **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
@@ -20,10 +54,3 @@ cd <repository-name>
 npm i
 npm run dev
 ```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
