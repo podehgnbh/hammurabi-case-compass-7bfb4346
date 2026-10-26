@@ -5,27 +5,49 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 const SYSTEM = `أنت "حمورابي"، مستشار قانوني خبير في القانون العراقي (القانون المدني رقم 40 لسنة 1951، قانون العقوبات رقم 111 لسنة 1969، قانون الأحوال الشخصية رقم 188 لسنة 1959، قانون المرافعات المدنية رقم 83 لسنة 1969، قانون أصول المحاكمات الجزائية رقم 23 لسنة 1971، قانون الإثبات رقم 107 لسنة 1979، وغيرها). تجيب بالعربية الفصحى الواضحة، بتنظيم احترافي بعناوين ونقاط (Markdown). عند ذكر مادة قانونية اذكر رقمها واسم القانون، وإذا لم تكن متأكداً من رقم المادة فقل ذلك صراحة. أنت أداة مساعدة للمحامي ولا تغني عن رأيه المهني.`;
 
 async function ask(input: string) {
-  const { generateResponse, GatewayError } = await import("@lovable.dev/ai-gateway");
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) throw new Error("خدمة Gemini غير مهيأة؛ أضف GEMINI_API_KEY إلى إعدادات الخادم.");
+
+  let response: Response;
   try {
-    const res: any = await generateResponse({
-      model: "openai/gpt-6-astra",
-      instructions: SYSTEM,
-      input,
-    } as any);
-    if (typeof res.output_text === "string" && res.output_text) return res.output_text as string;
-    const parts: string[] = [];
-    for (const item of res.output ?? []) {
-      if (item.type === "message") for (const c of item.content ?? []) if (c.type === "output_text") parts.push(c.text);
-    }
-    return parts.join("\n").trim() || "لم يتم الحصول على رد.";
-  } catch (e) {
-    if (e instanceof GatewayError) {
-      console.error("AI error", e.code, e.httpStatus);
-      if (e.httpStatus === 402) throw new Error("نفد رصيد الذكاء الاصطناعي، يرجى شحن الرصيد.");
-      if (e.httpStatus === 429) throw new Error("ضغط كبير على الخدمة، حاول بعد قليل.");
-    }
-    throw new Error("تعذر الاتصال بخدمة الذكاء الاصطناعي");
+    response = await fetch("https://generativelanguage.googleapis.com/v1beta/interactions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-goog-api-key": apiKey,
+      },
+      body: JSON.stringify({
+        model: "gemini-3.8-flash",
+        input,
+        system_instruction: SYSTEM,
+        store: false,
+      }),
+    });
+  } catch {
+    throw new Error("تعذر الاتصال بخدمة Gemini، حاول مرة أخرى بعد قليل.");
   }
+
+  if (!response.ok) {
+    if (response.status === 401 || response.status === 403) {
+      console.error("Gemini request rejected", response.status);
+      throw new Error("تعذر التحقق من مفتاح Gemini؛ راجع المفتاح وصلاحياته.");
+    }
+    if (response.status === 429) throw new Error("وصلت خدمة Gemini إلى حد الاستخدام؛ حاول لاحقاً أو راجع الحصة.");
+    console.error("Gemini request failed", response.status);
+    throw new Error("تعذر الحصول على رد من Gemini.");
+  }
+
+  const result = (await response.json()) as {
+    output_text?: string;
+    outputs?: Array<{ text?: string }>;
+    output?: Array<{ type?: string; text?: string; content?: Array<{ type?: string; text?: string }> }>;
+  };
+  const text = result.output_text
+    ?? result.outputs?.map((item) => item.text ?? "").join("\n")
+    ?? result.output?.filter((item) => item.type === "model_output").flatMap((item) =>
+      item.content?.map((part) => part.text ?? "") ?? (item.text ? [item.text] : []),
+    ).join("\n");
+  return text?.trim() || "لم يتم الحصول على رد.";
 }
 
 export const analyzeCase = createServerFn({ method: "POST" })
