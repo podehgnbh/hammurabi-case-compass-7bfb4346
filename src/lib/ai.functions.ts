@@ -39,12 +39,10 @@ async function ask(input: string) {
 
   const result = (await response.json()) as {
     output_text?: string;
-    outputs?: Array<{ text?: string }>;
-    output?: Array<{ type?: string; text?: string; content?: Array<{ type?: string; text?: string }> }>;
+    steps?: Array<{ type?: string; text?: string; content?: Array<{ type?: string; text?: string }> }>;
   };
   const text = result.output_text
-    ?? result.outputs?.map((item) => item.text ?? "").join("\n")
-    ?? result.output?.filter((item) => item.type === "model_output").flatMap((item) =>
+    ?? result.steps?.filter((item) => item.type === "model_output").flatMap((item) =>
       item.content?.map((part) => part.text ?? "") ?? (item.text ? [item.text] : []),
     ).join("\n");
   return text?.trim() || "لم يتم الحصول على رد.";
