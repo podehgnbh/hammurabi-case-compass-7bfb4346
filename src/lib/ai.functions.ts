@@ -10,17 +10,16 @@ async function ask(input: string) {
 
   let response: Response;
   try {
-    response = await fetch("https://generativelanguage.googleapis.com/v1beta/interactions", {
+    response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "x-goog-api-key": apiKey,
       },
       body: JSON.stringify({
-        model: "gemini-3.8-flash",
-        input,
-        system_instruction: SYSTEM,
-        store: false,
+        systemInstruction: { parts: [{ text: SYSTEM }] },
+        contents: [{ role: "user", parts: [{ text: input }] }],
+        generationConfig: { maxOutputTokens: 4096 },
       }),
     });
   } catch {
@@ -38,13 +37,11 @@ async function ask(input: string) {
   }
 
   const result = (await response.json()) as {
-    output_text?: string;
-    steps?: Array<{ type?: string; text?: string; content?: Array<{ type?: string; text?: string }> }>;
+    candidates?: Array<{ content?: { parts?: Array<{ text?: string }> } }>;
   };
-  const text = result.output_text
-    ?? result.steps?.filter((item) => item.type === "model_output").flatMap((item) =>
-      item.content?.map((part) => part.text ?? "") ?? (item.text ? [item.text] : []),
-    ).join("\n");
+  const text = result.candidates?.flatMap((candidate) =>
+    candidate.content?.parts?.map((part) => part.text ?? "") ?? [],
+  ).join("\n");
   return text?.trim() || "لم يتم الحصول على رد.";
 }
 
